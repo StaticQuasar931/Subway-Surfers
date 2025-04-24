@@ -3,12 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Subway Surfers Multiverse | Unblocked at School | StaticQuasar931</title>
+  <title>Subway Surfers Multiverse | Unblocked | StaticQuasar931</title>
 
-  <meta name="description" content="Play Subway Surfers New York, Beijing, San Francisco and more! Free, unblocked, and school-safe on StaticQuasar931.">
-  <meta name="keywords" content="Subway Surfers, Subway Surfers New York, Beijing, San Francisco, Subway Surfers unblocked, Subway Surfers school, subway runner game, Subway Surfers all versions, Subway Surfers g@me, subway surf browser, subway unbl0cked">
+  <!-- SEO & Indexing -->
+  <meta name="description" content="Play Subway Surfers online in 5 different versions – New York, Beijing, San Francisco and more! Unblocked, free, and school-safe from StaticQuasar931.">
+  <meta name="keywords" content="Subway Surfers, Subway Surfers unblocked, Subway Surfers New York, Beijing, San Francisco, Subway Surfers school, play Subway Surfers, Subway Surfers online, subway surf game, subway runner, subway surf versions, unbl0cked Subway Surfers, g@me">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="">
+  <meta name="google-site-verification" content="Q0JppYFHqNml_qBtmME2bbogn7ObRLMKgi71gvzGsR0" />
+  <link rel="canonical" href="https://staticquasar931.github.io/Subway-Surfers/" />
 
   <style>
     html, body {
@@ -73,33 +75,18 @@
 
     @keyframes flicker {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.3; }
-    }
-
-    .flash-arrow {
-      position: absolute;
-      bottom: 70px;
-      right: 40px;
-      z-index: 999;
-      font-size: 2.5em;
-      color: yellow;
-      animation: bounce 1s infinite;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-12px); }
+      50% { opacity: 0.5; }
     }
 
     .modal {
       display: none;
       position: fixed;
       z-index: 200;
-      left: 0; top: 0;
+      left: 0;
+      top: 0;
       width: 100%;
       height: 100%;
       background: rgba(0,0,0,0.85);
-      color: white;
       justify-content: center;
       align-items: center;
     }
@@ -122,8 +109,8 @@
 
     .button-grid {
       display: flex;
-      justify-content: center;
       flex-wrap: wrap;
+      justify-content: center;
       gap: 15px;
       margin-top: 10px;
     }
@@ -172,8 +159,8 @@
     }
 
     .intro p {
-      font-size: 1.2em;
-      margin-bottom: 10px;
+      font-size: 1.1em;
+      margin: 10px 0;
     }
 
     .intro a {
@@ -201,6 +188,23 @@
       document.getElementById("gameModal").style.display = "none";
     }
 
+    window.onload = () => {
+      const btn = document.getElementById("switchBtn");
+      const intro = document.getElementById("introScreen");
+
+      btn.classList.add("flicker");
+
+      setTimeout(() => {
+        btn.classList.remove("flicker");
+        intro.style.display = "none";
+      }, 10000);
+
+      intro.addEventListener("click", () => {
+        intro.style.display = "none";
+        btn.classList.remove("flicker");
+      });
+    };
+
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeModal();
     });
@@ -209,35 +213,16 @@
       const modal = document.getElementById("gameModal");
       if (e.target === modal) closeModal();
     });
-
-    window.onload = () => {
-      const btn = document.getElementById("switchBtn");
-      const arrow = document.getElementById("flashArrow");
-      const intro = document.getElementById("introScreen");
-
-      btn.classList.add("flicker");
-      arrow.style.display = "block";
-
-      setTimeout(() => {
-        btn.classList.remove("flicker");
-        arrow.style.display = "none";
-        intro.style.display = "none";
-      }, 10000);
-
-      intro.addEventListener("click", () => {
-        intro.style.display = "none";
-        btn.classList.remove("flicker");
-        arrow.style.display = "none";
-      });
-    };
   </script>
 </head>
 <body>
 
   <!-- INTRO -->
   <div class="intro" id="introScreen">
-    <h1>Welcome to Subway Surfers Multiverse</h1>
-    <p>If the game doesn’t work, click <strong>Switch Game</strong> below.</p>
+    <h1>Welcome to Subway Surfers Multiverse!</h1>
+    <p>🎯 For the most stable version, <a href="https://sites.google.com/view/staticquasar931/gm3z/subway-surfers_1/subway-surfers-main?authuser=0" target="_blank">click here to play on StaticQuasar931</a></p>
+    <p>🎮 Try other versions by clicking <strong>Switch Game</strong> below.</p>
+    <p>💡 <a href="https://forms.gle/zkPEQAb5gXg3md3n8" target="_blank">Suggest a new game or idea here</a></p>
     <p><a href="https://sites.google.com/view/staticquasar931" target="_blank">Brought to you by StaticQuasar931</a></p>
   </div>
 
@@ -249,11 +234,10 @@
     <a href="https://sites.google.com/view/staticquasar931/gm3z" target="_blank">🎮 More Unblocked Games by Static</a>
   </div>
 
-  <!-- SWITCH GAMES BUTTON -->
+  <!-- SWITCH GAME BUTTON -->
   <div id="switchBtn" onclick="openModal()">Switch Game</div>
-  <div class="flash-arrow" id="flashArrow" style="display:none;">⬆️</div>
 
-  <!-- MODAL MENU -->
+  <!-- GAME SWITCH MODAL -->
   <div class="modal" id="gameModal">
     <div class="modal-content">
       <h2>Select a Version</h2>
