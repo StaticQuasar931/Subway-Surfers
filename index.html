@@ -185,6 +185,24 @@
       font-weight: bold;
       text-decoration: none;
     }
+
+    .canonical-ref {
+      position: absolute;
+      bottom: 5px;
+      right: 10px;
+      font-size: 12px;
+      color: #ccc;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 5px 10px;
+      border-radius: 8px;
+      z-index: 50;
+    }
+
+    .canonical-ref a {
+      color: #0ff;
+      text-decoration: none;
+      font-weight: bold;
+    }
   </style>
 
   <script>
@@ -251,11 +269,6 @@
   <!-- MAIN GAME IFRAME -->
   <iframe id="gameFrame" src="https://subway-surfers.gitlab.io/file/" allowfullscreen scrolling="no"></iframe>
 
-  <!-- STATIC MENU -->
-  <div class="static-menu">
-    <a href="https://sites.google.com/view/staticquasar931/gm3z" target="_blank">🎮 More Unblocked Games by Static</a>
-  </div>
-
   <!-- SWITCH GAME BUTTON -->
   <div id="switchBtn" onclick="openModal()">Switch Game/Version</div>
 
@@ -271,6 +284,11 @@
         <button class="modal-btn" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-newyork/')">🗽 New York Alt 2</button>
       </div>
     </div>
+  </div>
+
+  <!-- CANONICAL LINK FOOTER -->
+  <div class="canonical-ref">
+    📍 Prefer the school-safe version? <a href="https://sites.google.com/view/staticquasar931/gm3z/subway-surfers_1/subway-surfers-main" target="_blank">Play it on StaticQuasar931 (Google Sites)</a>
   </div>
 
 </body>
