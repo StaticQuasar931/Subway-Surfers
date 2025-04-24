@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Play Subway Surfers Unblocked – All Versions | StaticQuasar931</title>
+  <title>Subway Surfers Multiverse | Unblocked at School | StaticQuasar931</title>
 
-  <meta name="description" content="Play Subway Surfers New York, Beijing, San Francisco, and more! Free and unblocked online games for school by StaticQuasar931.">
-  <meta name="keywords" content="Subway Surfers, Subway Surfers New York, Beijing, San Francisco, subway surf game, Subway Surfers unblocked, Subway Surfers school, Subway Surfers versions, Subway Surfers GitHub, Subway Surfers Google Sites, Subway Surfers g@me, subway runner">
+  <meta name="description" content="Play Subway Surfers New York, Beijing, San Francisco and more! Free, unblocked, and school-safe on StaticQuasar931.">
+  <meta name="keywords" content="Subway Surfers, Subway Surfers New York, Beijing, San Francisco, Subway Surfers unblocked, Subway Surfers school, subway runner game, Subway Surfers all versions, Subway Surfers g@me, subway surf browser, subway unbl0cked">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="">
 
@@ -122,9 +122,10 @@
 
     .button-grid {
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 15px;
+      margin-top: 10px;
     }
 
     .modal-btn {
@@ -148,14 +149,15 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      backdrop-filter: blur(8px);
-      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.65);
       padding: 30px;
       border-radius: 15px;
       z-index: 999;
       color: white;
       text-align: center;
       animation: fadeout 10s forwards;
+      cursor: pointer;
     }
 
     @keyframes fadeout {
@@ -211,20 +213,29 @@
     window.onload = () => {
       const btn = document.getElementById("switchBtn");
       const arrow = document.getElementById("flashArrow");
+      const intro = document.getElementById("introScreen");
+
       btn.classList.add("flicker");
       arrow.style.display = "block";
+
       setTimeout(() => {
         btn.classList.remove("flicker");
         arrow.style.display = "none";
-        document.getElementById("introScreen").style.display = "none";
+        intro.style.display = "none";
       }, 10000);
+
+      intro.addEventListener("click", () => {
+        intro.style.display = "none";
+        btn.classList.remove("flicker");
+        arrow.style.display = "none";
+      });
     };
   </script>
 </head>
 <body>
 
   <!-- INTRO -->
-  <div class="intro" id="introScreen" onclick="document.getElementById('introScreen').style.display='none'">
+  <div class="intro" id="introScreen">
     <h1>Welcome to Subway Surfers Multiverse</h1>
     <p>If the game doesn’t work, click <strong>Switch Game</strong> below.</p>
     <p><a href="https://sites.google.com/view/staticquasar931" target="_blank">Brought to you by StaticQuasar931</a></p>
