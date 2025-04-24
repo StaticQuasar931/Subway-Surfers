@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Subway Surfers Multiverse | Play Unblocked at School | StaticQuasar931</title>
+  <title>Play Subway Surfers Unblocked – All Versions | StaticQuasar931</title>
 
-  <!-- SEO Tags -->
-  <meta name="description" content="Play Subway Surfers in multiple versions – New York, Beijing, San Francisco & more. Free and unblocked on StaticQuasar931, playable at school or work.">
-  <meta name="keywords" content="Subway Surfers, Subway Surfers New York, Subway Surfers Beijing, Subway Surfers San Francisco, play Subway Surfers unblocked, Subway Surfers school, Subway Surfers online, free Subway Surfers versions, endless runner game, subway surf unbl0cked, subway runner g@me, subway surfer alternate version">
+  <meta name="description" content="Play Subway Surfers New York, Beijing, San Francisco, and more! Free and unblocked online games for school by StaticQuasar931.">
+  <meta name="keywords" content="Subway Surfers, Subway Surfers New York, Beijing, San Francisco, subway surf game, Subway Surfers unblocked, Subway Surfers school, Subway Surfers versions, Subway Surfers GitHub, Subway Surfers Google Sites, Subway Surfers g@me, subway runner">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="">
 
@@ -64,13 +63,32 @@
       font-weight: bold;
       cursor: pointer;
       z-index: 101;
-      animation: flicker 0.7s infinite;
       box-shadow: 0 0 15px #ff0022;
+      transition: 0.3s;
+    }
+
+    .flicker {
+      animation: flicker 0.9s infinite;
     }
 
     @keyframes flicker {
       0%, 100% { opacity: 1; }
-      50% { opacity: 0.2; }
+      50% { opacity: 0.3; }
+    }
+
+    .flash-arrow {
+      position: absolute;
+      bottom: 70px;
+      right: 40px;
+      z-index: 999;
+      font-size: 2.5em;
+      color: yellow;
+      animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
     }
 
     .modal {
@@ -88,84 +106,84 @@
 
     .modal-content {
       background: #111;
-      padding: 25px;
+      padding: 30px;
       border-radius: 15px;
       text-align: center;
-      width: 80%;
-      max-width: 500px;
+      width: 90%;
+      max-width: 650px;
       box-shadow: 0 0 20px #0ff;
     }
 
     .modal-content h2 {
-      margin-bottom: 15px;
-      font-size: 1.8em;
+      margin-bottom: 20px;
+      font-size: 2em;
       color: #0ff;
     }
 
-    .modal-content .main-links {
-      font-size: 1.2em;
-      margin-bottom: 10px;
+    .button-grid {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
-    .modal-content .main-links div {
-      margin: 10px 0;
+    .modal-btn {
+      background: #00f7ff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px 20px;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+      min-width: 160px;
     }
 
-    .modal-content .alt-links {
-      font-size: 1em;
-      margin-top: 20px;
-      color: #ccc;
-    }
-
-    .modal-content .alt-links div {
-      margin: 6px 0;
-    }
-
-    .modal-content a {
-      color: #00ffff;
-      text-decoration: none;
+    .modal-btn:hover {
+      background: #00cdd9;
     }
 
     .intro {
       position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.95);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.6);
+      padding: 30px;
+      border-radius: 15px;
       z-index: 999;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       color: white;
       text-align: center;
-      animation: fadeout 6s forwards;
+      animation: fadeout 10s forwards;
     }
 
     @keyframes fadeout {
       0% { opacity: 1; }
+      95% { opacity: 1; }
       100% { opacity: 0; visibility: hidden; }
     }
 
     .intro h1 {
-      font-size: 2em;
+      font-size: 1.8em;
+      margin-bottom: 10px;
     }
 
-    .intro .arrow {
-      margin-top: 10px;
-      font-size: 2em;
-      color: yellow;
-      animation: bounce 1s infinite;
+    .intro p {
+      font-size: 1.2em;
+      margin-bottom: 10px;
     }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
+    .intro a {
+      color: #00ffff;
+      font-weight: bold;
+      text-decoration: none;
     }
   </style>
 
   <script>
     window.onbeforeunload = function () {
-      return "Are you sure you want to leave? Your game might not be saved.";
+      return "Are you sure you want to leave? Your progress may not be saved.";
     };
 
     function switchGame(url) {
@@ -190,18 +208,25 @@
       if (e.target === modal) closeModal();
     });
 
-    setTimeout(() => {
-      document.getElementById("introScreen").style.display = "none";
-    }, 6000);
+    window.onload = () => {
+      const btn = document.getElementById("switchBtn");
+      const arrow = document.getElementById("flashArrow");
+      btn.classList.add("flicker");
+      arrow.style.display = "block";
+      setTimeout(() => {
+        btn.classList.remove("flicker");
+        arrow.style.display = "none";
+        document.getElementById("introScreen").style.display = "none";
+      }, 10000);
+    };
   </script>
 </head>
 <body>
 
   <!-- INTRO -->
-  <div class="intro" id="introScreen">
+  <div class="intro" id="introScreen" onclick="document.getElementById('introScreen').style.display='none'">
     <h1>Welcome to Subway Surfers Multiverse</h1>
-    <p>If the game doesn’t work,<br><strong>Click “Switch Game”</strong> in the bottom right!</p>
-    <div class="arrow">⬇️</div>
+    <p>If the game doesn’t work, click <strong>Switch Game</strong> below.</p>
     <p><a href="https://sites.google.com/view/staticquasar931" target="_blank">Brought to you by StaticQuasar931</a></p>
   </div>
 
@@ -215,19 +240,18 @@
 
   <!-- SWITCH GAMES BUTTON -->
   <div id="switchBtn" onclick="openModal()">Switch Game</div>
+  <div class="flash-arrow" id="flashArrow" style="display:none;">⬆️</div>
 
   <!-- MODAL MENU -->
   <div class="modal" id="gameModal">
     <div class="modal-content">
-      <h2>Choose a Subway Surfer Version</h2>
-      <div class="main-links">
-        <div><a href="#" onclick="switchGame('https://subway-surfers.gitlab.io/file/')">🌆 Main Version (Subway Surfers)</a></div>
-        <div><a href="#" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-beijing/')">🏯 Beijing Edition</a></div>
-        <div><a href="#" onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">🌉 San Francisco Edition</a></div>
-      </div>
-      <div class="alt-links">
-        <div><a href="#" onclick="switchGame('https://roblox-unblock.github.io/r8/subway-surfers-newyork/')">🗽 New York (Alt 1)</a></div>
-        <div><a href="#" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-newyork/')">🗽 New York (Alt 2)</a></div>
+      <h2>Select a Version</h2>
+      <div class="button-grid">
+        <button class="modal-btn" onclick="switchGame('https://subway-surfers.gitlab.io/file/')">🌆 New York (Main)</button>
+        <button class="modal-btn" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-beijing/')">🏯 Beijing</button>
+        <button class="modal-btn" onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">🌉 San Francisco</button>
+        <button class="modal-btn" onclick="switchGame('https://roblox-unblock.github.io/r8/subway-surfers-newyork/')">🗽 New York Alt 1</button>
+        <button class="modal-btn" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-newyork/')">🗽 New York Alt 2</button>
       </div>
     </div>
   </div>
