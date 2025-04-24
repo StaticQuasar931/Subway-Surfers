@@ -141,18 +141,27 @@
 
     .intro {
       position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      backdrop-filter: blur(12px);
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
       background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      animation: fadeout 10s forwards;
+    }
+
+    .intro-content {
+      text-align: center;
+      background: rgba(0, 0, 0, 0.6);
       padding: 30px;
       border-radius: 15px;
-      z-index: 999;
       color: white;
-      text-align: center;
-      animation: fadeout 10s forwards;
-      cursor: pointer;
+      cursor: default;
+      max-width: 90%;
     }
 
     @keyframes fadeout {
@@ -199,6 +208,7 @@
     window.onload = () => {
       const btn = document.getElementById("switchBtn");
       const intro = document.getElementById("introScreen");
+      const introContent = document.querySelector(".intro-content");
 
       btn.classList.add("flicker");
 
@@ -208,8 +218,7 @@
       }, 10000);
 
       intro.addEventListener("click", (e) => {
-        const isLinkOrButton = e.target.closest("a") || e.target.closest("button");
-        if (!isLinkOrButton) {
+        if (!introContent.contains(e.target)) {
           intro.style.display = "none";
           btn.classList.remove("flicker");
         }
@@ -230,11 +239,13 @@
 
   <!-- INTRO SCREEN -->
   <div class="intro" id="introScreen">
-    <h1>Welcome to Subway Surfers Multiverse!</h1>
-    <p>🎯 For the most stable version, <a href="https://sites.google.com/view/staticquasar931/gm3z/subway-surfers_1/subway-surfers-main?authuser=0" target="_blank">click here to play on StaticQuasar931</a></p>
-    <p>🎮 Try other versions by clicking <strong>Switch Game/Version</strong> below.</p>
-    <p>💡 <a href="https://forms.gle/zkPEQAb5gXg3md3n8" target="_blank">Suggest a new game or idea here</a></p>
-    <p><a href="https://sites.google.com/view/staticquasar931" target="_blank">Brought to you by StaticQuasar931</a></p>
+    <div class="intro-content">
+      <h1>Welcome to Subway Surfers Multiverse!</h1>
+      <p>🎯 For the most stable version, <a href="https://sites.google.com/view/staticquasar931/gm3z/subway-surfers_1/subway-surfers-main?authuser=0" target="_blank">click here to play on StaticQuasar931</a></p>
+      <p>🎮 Try other versions by clicking <strong>Switch Game/Version</strong> below.</p>
+      <p>💡 <a href="https://forms.gle/zkPEQAb5gXg3md3n8" target="_blank">Suggest a new game or idea here</a></p>
+      <p><a href="https://sites.google.com/view/staticquasar931" target="_blank">Brought to you by StaticQuasar931</a></p>
+    </div>
   </div>
 
   <!-- MAIN GAME IFRAME -->
