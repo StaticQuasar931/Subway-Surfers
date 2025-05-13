@@ -5,12 +5,39 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Subway Surfers Multiverse | Unblocked | StaticQuasar931</title>
 
-  <!-- SEO -->
+  <!-- Canonical & Favicon -->
+  <link rel="canonical" href="https://staticquasar931.github.io/Subway-Surfers/" />
+  <link rel="icon" href="https://res.cloudinary.com/dcsrqennd/image/upload/v1745535866/subwaysurfersiconforgithub_ddxvmo.avif" type="image/avif" />
+
+  <!-- Meta SEO -->
   <meta name="description" content="Play Subway Surfers online in 7 versions – New York, Beijing, San Francisco, Subway Runner, and more! Unblocked and school-safe from StaticQuasar931.">
   <meta name="keywords" content="Subway Surfers, Subway Surfers unblocked, Subway Runner, Subway Surfers New York, Beijing, San Francisco, Subway Surfers school, play Subway Surfers, Subway Surfers online, subway surf game, subway runner, subway surf versions, unbl0cked Subway Surfers, g@me">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://staticquasar931.github.io/Subway-Surfers/" />
-  <link rel="icon" href="https://res.cloudinary.com/dcsrqennd/image/upload/v1745535866/subwaysurfersiconforgithub_ddxvmo.avif" type="image/avif" />
+
+  <!-- OpenGraph & Twitter -->
+  <meta property="og:title" content="Play Subway Surfers - All Versions Unblocked | StaticQuasar931" />
+  <meta property="og:description" content="Try 7 Subway Surfers versions including New York, Subway Runner, Beijing, San Francisco and more. Free and school-safe!" />
+  <meta property="og:image" content="https://res.cloudinary.com/dcsrqennd/image/upload/v1745535866/subwaysurfersiconforgithub_ddxvmo.avif" />
+  <meta property="og:url" content="https://staticquasar931.github.io/Subway-Surfers/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Structured Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Subway Surfers Multiverse",
+    "description": "Play multiple Subway Surfers versions unblocked online: New York, Beijing, Subway Runner, and more from StaticQuasar931.",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "All",
+    "url": "https://staticquasar931.github.io/Subway-Surfers/",
+    "author": {
+      "@type": "Organization",
+      "name": "StaticQuasar931"
+    }
+  }
+  </script>
 
   <style>
     html, body {
@@ -155,13 +182,32 @@
       95% { opacity: 1; }
       100% { opacity: 0; visibility: hidden; }
     }
+
+    #runnerTip {
+      position: fixed;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.75);
+      color: #0ff;
+      padding: 10px 20px;
+      font-weight: bold;
+      border: 2px solid #0ff;
+      border-radius: 10px;
+      z-index: 150;
+      display: none;
+    }
   </style>
 
   <script>
     const STORAGE_KEY = "subway_current_iframe";
+    const runnerURLs = [
+      "subway-runner",
+      "bus-subway-runner"
+    ];
 
     function isSubwayRunner(url) {
-      return url.includes("subway-runner");
+      return runnerURLs.some(key => url.includes(key));
     }
 
     function switchGame(url) {
@@ -181,6 +227,14 @@
       const isRunner = isSubwayRunner(url);
       document.getElementById("switchBtn").classList.toggle("middle-right", isRunner);
       document.querySelector(".static-menu").classList.toggle("middle-left", isRunner);
+
+      const tip = document.getElementById("runnerTip");
+      if (isRunner) {
+        tip.style.display = "block";
+        setTimeout(() => tip.style.display = "none", 10000);
+      } else {
+        tip.style.display = "none";
+      }
     }
 
     function openModal() {
@@ -194,12 +248,19 @@
     window.onload = () => {
       const intro = document.getElementById("introScreen");
       const btn = document.getElementById("switchBtn");
+      const iframe = document.getElementById("gameFrame");
       const data = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
       const now = Date.now();
+      let startURL = "https://subway-surfers.gitlab.io/file/";
 
       if (data.url && data.timestamp && (now - data.timestamp) < 100 * 60 * 60 * 1000) {
-        loadGame(data.url);
+        startURL = data.url;
       }
+
+      // Delay actual load until intro fades
+      setTimeout(() => {
+        loadGame(startURL);
+      }, 500);
 
       btn.classList.add("flicker");
       setTimeout(() => {
@@ -214,9 +275,8 @@
         }
       });
 
-      // Auto refresh iframe on network changes
-      window.addEventListener("online", () => document.getElementById("gameFrame").contentWindow.location.reload());
-      window.addEventListener("offline", () => document.getElementById("gameFrame").contentWindow.location.reload());
+      window.addEventListener("online", () => iframe.contentWindow?.location.reload());
+      window.addEventListener("offline", () => iframe.contentWindow?.location.reload());
     };
 
     window.onbeforeunload = () => "Are you sure you want to leave? Your progress may not be saved.";
@@ -237,8 +297,11 @@
     </div>
   </div>
 
-  <!-- MAIN GAME IFRAME -->
-  <iframe id="gameFrame" src="https://subway-surfers.gitlab.io/file/" allowfullscreen scrolling="no"></iframe>
+  <!-- Subway Runner Tip -->
+  <div id="runnerTip">⚠️ If it doesn't load, try turning off your internet during loading.</div>
+
+  <!-- GAME IFRAME -->
+  <iframe id="gameFrame" loading="lazy" allowfullscreen scrolling="no"></iframe>
 
   <!-- STATIC MENU -->
   <div class="static-menu">
@@ -248,7 +311,7 @@
   <!-- SWITCH GAME BUTTON -->
   <div id="switchBtn" onclick="openModal()">Switch Game/Version</div>
 
-  <!-- MODAL MENU -->
+  <!-- MODAL -->
   <div class="modal" id="gameModal">
     <div class="modal-content">
       <h2>Select a Version</h2>
@@ -259,14 +322,9 @@
         <button class="modal-btn" onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">🌉 San Francisco</button>
         <button class="modal-btn" onclick="switchGame('https://zohoho.org/_games/subwaysurfers/')">🌉 San Francisco Alt</button>
         <button class="modal-btn" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-beijing/')">🏯 Beijing</button>
-        <div style="display: flex; flex-direction: column; align-items: center;">
-          <button class="modal-btn" onclick="switchGame('https://23azostore.github.io/s7/subway-runner')">🚇 Subway Runner (Main)</button>
-          <button class="modal-btn" onclick="switchGame('https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/bus-subway-runner/index.html')">🚇 Subway Runner #2</button>
-          <button class="modal-btn" onclick="switchGame('https://unblocked-games.s3.amazonaws.com/games/2022/unity/bus-subway-runner/index.html')">🚇 Subway Runner #3</button>
-          <p style="color: #0ff; font-size: 0.95em; margin-top: 6px; text-align: center; max-width: 240px;">
-            ⚠️ If it doesn't load, try turning off your internet during loading.
-          </p>
-        </div>
+        <button class="modal-btn" onclick="switchGame('https://23azostore.github.io/s7/subway-runner')">🚇 Subway Runner (Main)</button>
+        <button class="modal-btn" onclick="switchGame('https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/bus-subway-runner/index.html')">🚇 Subway Runner #2</button>
+        <button class="modal-btn" onclick="switchGame('https://unblocked-games.s3.amazonaws.com/games/2022/unity/bus-subway-runner/index.html')">🚇 Subway Runner #3</button>
         <button class="modal-btn" onclick="switchGame('https://zohoho.org/_games/subway-surfers-bali/')">🏖️ Bali</button>
       </div>
     </div>
