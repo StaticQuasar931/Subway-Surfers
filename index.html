@@ -1,3 +1,4 @@
+<!-- FULL HTML CODE STARTS HERE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +7,8 @@
   <title>Subway Surfers Multiverse | Unblocked | StaticQuasar931</title>
   <link rel="canonical" href="https://staticquasar931.github.io/Subway-Surfers/" />
   <link rel="icon" href="https://res.cloudinary.com/dcsrqennd/image/upload/v1745535866/subwaysurfersiconforgithub_ddxvmo.avif" type="image/avif" />
-  <meta name="description" content="Play Subway Surfers online in multiple versions – New York, Beijing, San Francisco, Subway Runner and more! Unblocked and school-safe from StaticQuasar931.">
-  <meta name="keywords" content="Subway Surfers, Subway Surfers unblocked, Subway Runner, Subway Surfers New York, Beijing, San Francisco, Subway Surfers school, play Subway Surfers, Subway Surfers online, subway surf game, subway runner, subway surf versions, unbl0cked Subway Surfers, g@me">
+  <meta name="description" content="Play Subway Surfers online in multiple versions – New York, Beijing, San Francisco, Subway Runner, Zurich, Easter Ireland, and Bali! Unblocked and school-safe from StaticQuasar931.">
+  <meta name="keywords" content="Subway Surfers, Subway Surfers unblocked, Subway Surfers school, play Subway Surfers, Subway Surfers online, subway surf game, subway surf versions, Subway Surfers New York, Subway Surfers Beijing, Subway Surfers San Francisco, Subway Runner, Zurich, Bali, Easter Ireland, subway runner game, unbl0cked Subway Surfers, g@me">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Play Subway Surfers - All Versions Unblocked | StaticQuasar931" />
   <meta property="og:description" content="Try Subway Surfers versions including New York, Subway Runner, Beijing, San Francisco and more. Free and school-safe!" />
@@ -32,6 +33,10 @@
       position: absolute;
       top: 0;
       left: 0;
+    }
+
+    .static-menu, #switchBtn {
+      transition: bottom 2s ease;
     }
 
     .static-menu {
@@ -171,15 +176,29 @@
     .intro-content strong {
       font-weight: bold;
     }
+
+    #lastUpdate {
+      margin-top: 12px;
+      font-size: 14px;
+      color: #aaa;
+    }
   </style>
 
   <script>
     const STORAGE_KEY = "subway_current_iframe";
+    const runnerVersions = ["subway-runner", "bus-subway-runner", "tam-subway-runner"];
 
     function switchGame(url) {
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ url, timestamp: Date.now() }));
       document.getElementById("gameFrame").src = url;
+      updateButtonPosition(url);
       closeModal();
+    }
+
+    function updateButtonPosition(url) {
+      const isRunner = runnerVersions.some(r => url.includes(r));
+      document.querySelector('.static-menu').style.bottom = isRunner ? '70px' : '10px';
+      document.getElementById('switchBtn').style.bottom = isRunner ? '70px' : '10px';
     }
 
     function closeModal() {
@@ -196,6 +215,7 @@
       const now = Date.now();
       const startURL = (saved.url && now - saved.timestamp < 1000 * 60 * 60 * 100) ? saved.url : defaultURL;
       document.getElementById("gameFrame").src = startURL;
+      updateButtonPosition(startURL);
 
       const intro = document.getElementById("introScreen");
       setTimeout(() => {
@@ -223,6 +243,7 @@
       <p>🎯 <a href="https://sites.google.com/view/staticquasar931/gm3z/subway-surfers_1/subway-surfers-main?authuser=0" style="color:#0ff" target="_blank">Click here to play the most stable version</a></p>
       <p>📍 Submit Feedback <a href="https://sites.google.com/view/staticquasar931/google-form" style="color:#0ff" target="_blank">Google Form</a></p>
       <p><a href="https://sites.google.com/view/staticquasar931" style="color:#0ff" target="_blank">Made by StaticQuasar931</a></p>
+      <div id="lastUpdate">Last updated 5/30/25 Version 1.04.28</div>
     </div>
   </div>
 
@@ -247,8 +268,8 @@
 
       <div class="section-title">🌉 San Francisco</div>
       <div class="button-grid">
-        <button class="modal-btn main-btn" onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">Main</button>
-        <button class="modal-btn" onclick="switchGame('https://zohoho.org/_games/subwaysurfers/')">Main Backup</button>
+        <button class="modal-btn main-btn" onclick="switchGame('https://zohoho.org/_games/subwaysurfers/')">Main</button>
+        <button class="modal-btn" onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">Main Backup</button>
       </div>
 
       <div class="section-title">🏯 Beijing</div>
@@ -273,6 +294,5 @@
       </div>
     </div>
   </div>
-
 </body>
 </html>
