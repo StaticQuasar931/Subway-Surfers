@@ -211,7 +211,7 @@
 
     window.onload = () => {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-      const defaultURL = "https://subway-surfers.gitlab.io/file/";
+      const defaultURL = "https://scrap-metal.github.io/s8/subway-surfers-newyork/";
       const now = Date.now();
       const startURL = (saved.url && now - saved.timestamp < 1000 * 60 * 60 * 100) ? saved.url : defaultURL;
       document.getElementById("gameFrame").src = startURL;
