@@ -1,298 +1,472 @@
-<!-- FULL HTML CODE STARTS HERE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Subway Surfers Multiverse | Unblocked | StaticQuasar931</title>
+
+  <!-- Canonical and Icons -->
   <link rel="canonical" href="https://staticquasar931.github.io/Subway-Surfers/" />
   <link rel="icon" href="https://res.cloudinary.com/dcsrqennd/image/upload/v1745535866/subwaysurfersiconforgithub_ddxvmo.avif" type="image/avif" />
-  <meta name="description" content="Play Subway Surfers online in multiple versions – New York, Beijing, San Francisco, Subway Runner, Zurich, Easter Ireland, and Bali! Unblocked and school-safe from StaticQuasar931.">
-  <meta name="keywords" content="Subway Surfers, Subway Surfers unblocked, Subway Surfers school, play Subway Surfers, Subway Surfers online, subway surf game, subway surf versions, Subway Surfers New York, Subway Surfers Beijing, Subway Surfers San Francisco, Subway Runner, Zurich, Bali, Easter Ireland, subway runner game, unbl0cked Subway Surfers, g@me">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Play Subway Surfers - All Versions Unblocked | StaticQuasar931" />
-  <meta property="og:description" content="Try Subway Surfers versions including New York, Subway Runner, Beijing, San Francisco and more. Free and school-safe!" />
+
+  <!-- Primary SEO -->
+  <meta name="description" content="Play Subway Surfers in many editions including the Classic keyboard version with W A S D controls and Esc to pause. Explore New York 2023, Venice, Greece, Hollywood, Hawaii, Iceland 2024, Winter Wonderland, Winter Holiday, Underwater, Year of the Snake, plus more. Unblocked and school safe." />
+  <meta name="keywords" content="Subway Surfers, Subway Surfers unblocked, Subway Surfers school, Subway Surfers keyboard controls, Subway Surfers WASD, Subway Surfers Classic, Subway Surfers New York 2023, Subway Surfers Venice, Subway Surfers Greece, Subway Surfers Hollywood, Subway Surfers Hawaii, Subway Surfers Iceland 2024, Subway Surfers Winter Wonderland, Subway Surfers Winter Holiday, Subway Surfers Underwater, Subway Surfers Year of the Snake, Subway Surfers Zurich, Subway Surfers San Francisco, subway surf game, subway surf g@me, unbl0cked Subway Surfers, school safe game, staticquasar931" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Play Subway Surfers Multiverse - Classic WASD Edition and More | StaticQuasar931" />
+  <meta property="og:description" content="Classic version with W A S D and Esc to pause. Many editions available. Free, unblocked, and school safe." />
   <meta property="og:image" content="https://res.cloudinary.com/dcsrqennd/image/upload/v1745535866/subwaysurfersiconforgithub_ddxvmo.avif" />
   <meta property="og:url" content="https://staticquasar931.github.io/Subway-Surfers/" />
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
 
   <style>
+    :root{
+      --bg:#000;
+      --panel:#111;
+      --text:#e8faff;
+      --accent:#00f7ff;
+      --shadow:rgba(0,255,255,0.35);
+      --gold1:#ffd700; --gold2:#ffbf00; --gold3:#d9a200;
+      --wasd:#9a7cff; --arrows:#55d4ff;
+    }
+
     html, body {
-      margin: 0;
-      padding: 0;
-      background: black;
-      overflow: hidden;
-      font-family: 'Segoe UI', sans-serif;
+      margin:0; padding:0;
+      background:var(--bg);
+      overflow:hidden;
+      font-family:'Segoe UI', system-ui, -apple-system, Roboto, Arial, sans-serif;
+      color:var(--text);
     }
 
-    iframe {
-      width: 100%;
-      height: 100vh;
-      border: none;
-      position: absolute;
-      top: 0;
-      left: 0;
+    /* Game frame */
+    iframe{
+      position:absolute; inset:0;
+      width:100%; height:100vh; border:none;
     }
 
-    .static-menu, #switchBtn {
-      transition: bottom 2s ease;
+    /* Floating widgets */
+    .static-menu, #switchBtn{ transition: bottom 2s ease; }
+    .static-menu{
+      position:absolute; bottom:10px; left:10px;
+      background:#111; color:#0ff; padding:8px 12px;
+      border-radius:10px; border:2px solid #0ff; font-weight:700; z-index:100;
+      box-shadow:0 0 10px #0ff;
+    }
+    .static-menu a{ color:#0ff; text-decoration:none; }
+    #switchBtn{
+      position:absolute; bottom:10px; right:10px; z-index:101;
+      background:#ff0022; color:#fff; padding:8px 12px; border-radius:10px; font-weight:800;
+      box-shadow:0 0 10px #ff0022; cursor:pointer; user-select:none;
+      transition:transform .15s ease, box-shadow .2s ease;
+    }
+    #switchBtn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(255,0,34,.45); }
+
+    /* Intro */
+    .intro{
+      position:fixed; inset:0; z-index:999;
+      display:flex; align-items:center; justify-content:center;
+      background:rgba(0,0,0,.8);
+      opacity:1; transform:scale(1);
+      transition:opacity .35s ease, transform .35s ease;
+    }
+    .intro.hide{ opacity:0; transform:scale(.98); pointer-events:none; }
+    .intro-content{
+      background:rgba(20,20,20,.95); padding:22px; border-radius:12px; width:min(92%,520px);
+      text-align:center; box-shadow:0 0 28px rgba(0,0,0,.45);
+    }
+    .intro-content a{ color:#0ff; }
+
+    #lastUpdate{ margin-top:10px; font-size:13px; color:#aaa; }
+
+    /* Modal base */
+    .modal{
+      position:fixed; inset:0; z-index:200;
+      display:none; /* toggled by .open */
+      align-items:flex-start; justify-content:center; padding:28px 0; overflow-y:auto;
+      background:rgba(0,0,0,.65); backdrop-filter:saturate(120%) blur(3px);
+    }
+    .modal.open{ display:flex; }
+    .modal-panel{
+      width:96%; max-width:1260px;
+      background:var(--panel); border-radius:16px; color:#fff;
+      box-shadow:0 20px 60px rgba(0,0,0,.6), 0 0 24px var(--shadow);
+      transform:translateY(12px) scale(.98); opacity:0;
+      transition:transform .25s ease, opacity .25s ease;
+    }
+    .modal.open .modal-panel{ transform:translateY(0) scale(1); opacity:1; }
+
+    .modal-topbar{
+      position:sticky; top:0; z-index:2;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      padding:14px 16px;
+      background:linear-gradient(180deg, rgba(0,255,255,.08), rgba(0,0,0,0));
+      border-bottom:1px solid rgba(255,255,255,.08);
+      border-top-left-radius:16px; border-top-right-radius:16px;
+    }
+    .modal-title{ font-size:20px; font-weight:900; color:var(--accent); }
+    .toolbar{ display:flex; gap:8px; flex-wrap:wrap; }
+    .tool-btn{
+      background:#1a1a1a; border:1px solid rgba(255,255,255,.15); color:#e8faff;
+      padding:8px 12px; border-radius:10px; font-weight:800; font-size:13px; cursor:pointer;
+      transition:background .2s ease, transform .12s ease;
+    }
+    .tool-btn:hover{ background:#232323; transform:translateY(-1px); }
+
+    /* Legend as small colored buttons */
+    .legend{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center; padding:10px 14px; }
+    .legend-btn{
+      display:inline-flex; align-items:center; gap:8px; padding:6px 10px;
+      border-radius:10px; border:1px solid rgba(255,255,255,.15); font-weight:900; font-size:12px;
+      user-select:none;
+    }
+    .legend-classic{ background:linear-gradient(180deg, var(--gold1) 0%, var(--gold2) 60%, var(--gold3) 100%); color:#1b1400; }
+    .legend-wasd{ background:var(--wasd); color:#120a30; }
+    .legend-arrows{ background:var(--arrows); color:#0b1320; }
+    .kbd{
+      display:inline-block; font-size:10px; background:rgba(255,255,255,.85); color:#111;
+      padding:1px 5px; border-radius:6px; font-weight:900;
+    }
+    .stable-badge{
+      display:inline-block; margin-left:6px; padding:2px 6px; font-size:11px; border-radius:999px;
+      background:#0f0; color:#041b04; border:1px solid #9cff9c; font-weight:900;
     }
 
-    .static-menu {
-      position: absolute;
-      bottom: 10px;
-      left: 10px;
-      background: #111;
-      color: #0ff;
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 2px solid #0ff;
-      font-weight: bold;
-      z-index: 100;
-      box-shadow: 0 0 10px #0ff;
+    /* Sections */
+    .section{ padding:8px 16px 2px; }
+    .section h3{
+      font-size:16px; color:var(--accent); text-decoration:underline;
+      margin:14px 0 8px;
+    }
+    .section p{ margin:-2px 0 10px; font-size:12px; color:#b0eaff; opacity:.95; }
+
+    /* Grid and buttons */
+    .grid{
+      display:grid; grid-template-columns:repeat(auto-fit, minmax(170px, 1fr));
+      gap:8px; margin:0 0 18px;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center; gap:6px; text-align:center;
+      background:#222; color:#e8faff; border:1px solid rgba(255,255,255,.12);
+      border-radius:10px; padding:9px 10px; font-weight:900; font-size:13px; line-height:1.2;
+      cursor:pointer; transition:transform .12s ease, box-shadow .2s ease, background .25s ease, opacity .2s ease, border-color .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(0,0,0,.35); }
+    .btn:focus-visible{ outline:2px solid var(--accent); outline-offset:2px; }
+
+    /* Color variants */
+    .btn-classic{
+      background:linear-gradient(180deg, var(--gold1) 0%, var(--gold2) 60%, var(--gold3) 100%);
+      color:#1b1400; border:1px solid rgba(255,215,0,.85); box-shadow:0 0 14px rgba(255,215,0,.45), inset 0 0 4px rgba(255,215,0,.8);
+    }
+    .btn-wasd{ background:var(--wasd); color:#120a30; border:1px solid rgba(154,124,255,.9); box-shadow:0 0 12px rgba(154,124,255,.45); }
+    .btn-arrows{ background:var(--arrows); color:#0b1320; border:1px solid rgba(85,212,255,.9); box-shadow:0 0 10px rgba(85,212,255,.35); }
+
+    /* Active (currently playing) */
+    .btn.active{
+      background:#3a3a3a !important; color:#bdbdbd !important; border-color:#5a5a5a !important;
+      box-shadow:none !important; pointer-events:none; opacity:.88;
     }
 
-    .static-menu a {
-      text-decoration: none;
-      color: #0ff;
-    }
-
-    #switchBtn {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      background: #ff0022;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 10px;
-      font-weight: bold;
-      cursor: pointer;
-      z-index: 101;
-      box-shadow: 0 0 10px #ff0022;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 200;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      overflow-y: auto;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 30px 0;
-    }
-
-    .modal-content {
-      background: #111;
-      padding: 20px;
-      border-radius: 12px;
-      text-align: center;
-      width: 95%;
-      max-width: 750px;
-      box-shadow: 0 0 20px #0ff;
-      color: white;
-    }
-
-    .modal-content h2 {
-      font-size: 22px;
-      margin-bottom: 15px;
-      color: #0ff;
-    }
-
-    .section-title {
-      font-size: 18px;
-      color: #00f7ff;
-      text-decoration: underline;
-      margin: 15px 0 10px;
-      cursor: pointer;
-    }
-
-    .button-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-bottom: 25px;
-    }
-
-    .modal-btn {
-      background: #55d4ff;
-      border: none;
-      border-radius: 8px;
-      padding: 10px 16px;
-      font-weight: bold;
-      color: black;
-      min-width: 180px;
-      font-size: 14px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .modal-btn:hover {
-      background: #3bb8de;
-    }
-
-    .main-btn {
-      background: gold !important;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    .beach-btn { background: #fdd76e; }
-    .easter-btn { background: #d6a9ff; }
-    .zurich-btn { background: #96f5cc; }
-
-    .intro {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      transition: 0.3s ease;
-    }
-
-    .intro-content {
-      background: rgba(20, 20, 20, 0.95);
-      padding: 25px;
-      border-radius: 12px;
-      text-align: center;
-      color: white;
-      max-width: 480px;
-      width: 90%;
-    }
-
-    .intro-content p {
-      margin: 10px 0;
-    }
-
-    .intro-content strong {
-      font-weight: bold;
-    }
-
-    #lastUpdate {
-      margin-top: 12px;
-      font-size: 14px;
-      color: #aaa;
-    }
+    /* Helper text */
+    .muted{ color:#b0eaff; font-size:12px; opacity:.9; padding:0 16px 14px; }
   </style>
 
   <script>
     const STORAGE_KEY = "subway_current_iframe";
     const runnerVersions = ["subway-runner", "bus-subway-runner", "tam-subway-runner"];
 
-    function switchGame(url) {
+    function switchGame(url){
       localStorage.setItem(STORAGE_KEY, JSON.stringify({ url, timestamp: Date.now() }));
-      document.getElementById("gameFrame").src = url;
+      const f = document.getElementById("gameFrame");
+      if(f.src !== url) f.src = url;
       updateButtonPosition(url);
+      markActive(url);
       closeModal();
     }
 
-    function updateButtonPosition(url) {
+    function updateButtonPosition(url){
       const isRunner = runnerVersions.some(r => url.includes(r));
       document.querySelector('.static-menu').style.bottom = isRunner ? '70px' : '10px';
       document.getElementById('switchBtn').style.bottom = isRunner ? '70px' : '10px';
     }
 
-    function closeModal() {
-      document.getElementById("gameModal").style.display = "none";
+    // FIX: Pure class toggle - no inline display shenanigans
+    function openModal(){
+      const modal = document.getElementById("gameModal");
+      modal.classList.add("open");
+      // Make sure no inline display overrides exist
+      modal.style.removeProperty('display');
+      // refresh active state on open
+      markActive(document.getElementById("gameFrame").src);
     }
 
-    function openModal() {
-      document.getElementById("gameModal").style.display = "flex";
+    function closeModal(){
+      const modal = document.getElementById("gameModal");
+      modal.classList.remove("open");
+    }
+
+    function markActive(url){
+      document.querySelectorAll('.btn[data-url]').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll(`.btn[data-url="${url}"]`).forEach(b => b.classList.add('active'));
     }
 
     window.onload = () => {
       const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-      const defaultURL = "https://scrap-metal.github.io/s8/subway-surfers-newyork/";
+      const defaultURL = "https://staticquasar931.github.io/SubwaySurfers/"; // Classic main
       const now = Date.now();
-      const startURL = (saved.url && now - saved.timestamp < 1000 * 60 * 60 * 100) ? saved.url : defaultURL;
-      document.getElementById("gameFrame").src = startURL;
+      const startURL = (saved.url && now - saved.timestamp < 1000*60*60*100) ? saved.url : defaultURL;
+
+      const f = document.getElementById("gameFrame");
+      f.src = startURL;
       updateButtonPosition(startURL);
+      setTimeout(()=> markActive(startURL), 0);
 
       const intro = document.getElementById("introScreen");
-      setTimeout(() => {
-        intro.style.display = "none";
-      }, 7000);
-
+      setTimeout(()=> intro.classList.add("hide"), 6500);
       intro.addEventListener("click", e => {
-        if (!e.target.closest(".intro-content")) {
-          intro.style.display = "none";
-        }
+        if(!e.target.closest(".intro-content")) intro.classList.add("hide");
       });
     };
 
     window.onbeforeunload = () => "Are you sure you want to leave? Your progress may not be saved.";
-    document.addEventListener('keydown', e => e.key === 'Escape' && closeModal());
-    document.addEventListener('click', e => e.target.id === 'gameModal' && closeModal());
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeModal(); });
+    document.addEventListener('click', e => { if(e.target.id === 'gameModal') closeModal(); });
   </script>
 </head>
 <body>
 
+  <!-- Intro -->
   <div class="intro" id="introScreen">
     <div class="intro-content">
-      <h2>🎉 Welcome to Subway Surfers Multiverse!</h2>
-      <p><strong>Click "Switch Game/Version" to explore backups or other cities.</strong></p>
-      <p>🎯 <a href="https://sites.google.com/view/staticquasar931/gm3z/subway-surfers_1/subway-surfers-main?authuser=0" style="color:#0ff" target="_blank">Click here to play the most stable version</a></p>
-      <p>📍 Submit Feedback <a href="https://sites.google.com/view/staticquasar931/google-form" style="color:#0ff" target="_blank">Google Form</a></p>
-      <p><a href="https://sites.google.com/view/staticquasar931" style="color:#0ff" target="_blank">Made by StaticQuasar931</a></p>
-      <div id="lastUpdate">Last updated 9/09/25 Version 1.05.00</div>
+      <h2>🎉 Welcome to Subway Surfers Multiverse</h2>
+      <p><strong>Classic is the most stable edition with W A S D controls and Esc to pause.</strong></p>
+      <p>Keyboard editions appear first in each group. Arrow key editions appear after.</p>
+      <p>🎯 <a href="https://staticquasar931.github.io/SubwaySurfers/" target="_blank" rel="noopener">Open Classic directly</a></p>
+      <p>🛠️ <a href="https://sites.google.com/view/staticquasar931/google-form" target="_blank" rel="noopener">Report an issue</a></p>
+      <p><a href="https://sites.google.com/view/staticquasar931" target="_blank" rel="noopener">Made by StaticQuasar931</a></p>
+      <div id="lastUpdate">Last updated 10/26/25 Version 1.80.01</div>
     </div>
   </div>
 
+  <!-- Game Frame -->
   <iframe id="gameFrame" loading="lazy" allowfullscreen scrolling="no"></iframe>
 
+  <!-- Static Menu -->
   <div class="static-menu">
-    <a href="https://sites.google.com/view/staticquasar931/gm3z" target="_blank">🎮 More Unblocked Games</a>
+    <a href="https://sites.google.com/view/staticquasar931/gm3z" target="_blank" rel="noopener">🎮 More Unblocked Games</a>
   </div>
 
+  <!-- Switch Button -->
   <div id="switchBtn" onclick="openModal()">Switch Game/Version</div>
 
+  <!-- Modal -->
   <div class="modal" id="gameModal">
-    <div class="modal-content">
-      <h2>Select a Version</h2>
-
-<div class="section-title">🏙️ Subway Surfers – New York</div>
-<div class="button-grid">
-  <button class="modal-btn main-btn" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-newyork/')">Main</button>
-  <button class="modal-btn" onclick="switchGame('https://roblox-unblock.github.io/r8/subway-surfers-newyork/')">Backup 1</button>
-</div>
-
-
-      <div class="section-title">🌉 San Francisco</div>
-      <div class="button-grid">
-        <button class="modal-btn main-btn" onclick="switchGame('https://zohoho.org/_games/subwaysurfers/')">Main</button>
-        <button class="modal-btn" onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">Main Backup</button>
+    <div class="modal-panel">
+      <div class="modal-topbar">
+        <div class="modal-title">StaticQuasar931's Subway Surfer Hub</div>
+        <div class="toolbar">
+          <button class="tool-btn" onclick="open('https://sites.google.com/view/staticquasar931/google-form','_blank')">🛠️ Report an Issue</button>
+          <button class="tool-btn" onclick="closeModal()">✖ Close</button>
+        </div>
       </div>
 
-      <div class="section-title">🏯 Beijing</div>
-      <div class="button-grid">
-        <button class="modal-btn main-btn" onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-beijing/')">Main</button>
-        <button class="modal-btn" onclick="switchGame('https://ug17.github.io/play/Subway-Surfers/')">Main Backup</button>
+      <!-- Legend -->
+      <div class="legend" aria-live="polite">
+        <div class="legend-btn legend-classic">⭐ Classic <span class="kbd">WASD</span> <span class="stable-badge">Most Stable</span></div>
+        <div class="legend-btn legend-wasd">⌨️ Keyboard Ready <span class="kbd">WASD</span></div>
+        <div class="legend-btn legend-arrows">↕ Arrow Keys Only</div>
       </div>
 
-      <div class="section-title">🚇 Subway Runner</div>
-      <div class="button-grid">
-        <button class="modal-btn main-btn" onclick="switchGame('https://23azostore.github.io/s7/subway-runner')">Main</button>
-        <button class="modal-btn" onclick="switchGame('https://dnrweqffuwjtx.cloudfront.net/games/2022/unity/bus-subway-runner/index.html')">Backup #2</button>
-        <button class="modal-btn" onclick="switchGame('https://unblocked-games.s3.amazonaws.com/games/2022/unity/bus-subway-runner/index.html')">Backup #3</button>
-        <button class="modal-btn" onclick="switchGame('https://advanced-channeler.02.gz-associates.com/?t=tam-subway-runner')">Backup #4</button>
+      <!-- Classic -->
+      <div class="section">
+        <h3>⭐ Classic</h3>
+        <p>W A S D in game. Esc pauses when focused. Esc also closes this menu.</p>
+        <div class="grid">
+          <button class="btn btn-classic"
+                  data-url="https://staticquasar931.github.io/SubwaySurfers/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfers/')">
+            ▶ Classic Main <span class="stable-badge">Most Stable</span>
+          </button>
+        </div>
       </div>
 
-      <div class="section-title">🎮 Other Versions</div>
-      <div class="button-grid">
-        <button class="modal-btn easter-btn" onclick="switchGame('https://g.igroutka.ru/games/164/iu4mVlSRFT17sBHk/8/subway_surfers_easter_ireland/')">🐣 Easter Ireland</button>
-        <button class="modal-btn beach-btn" onclick="switchGame('https://zohoho.org/_games/subway-surfers-bali/')">🏖️ Bali</button>
-        <button class="modal-btn zurich-btn" onclick="switchGame('https://szhong.4399.com/4399swf//upload_swf/ftp35/liuxinyu/20210324/jj01/index.html')">🥚 Zurich</button>
+      <!-- New York -->
+      <div class="section">
+        <h3>🏙️ New York</h3>
+        <p>Keyboard editions first. Older mains after.</p>
+        <div class="grid">
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersNewyork2023/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersNewyork2023/')">
+            New York 2023 <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://scrap-metal.github.io/s8/subway-surfers-newyork/"
+                  onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-newyork/')">
+            Old Main
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://roblox-unblock.github.io/r8/subway-surfers-newyork/"
+                  onclick="switchGame('https://roblox-unblock.github.io/r8/subway-surfers-newyork/')">
+            Old Backup 1
+          </button>
+        </div>
       </div>
+
+      <!-- Europe -->
+      <div class="section">
+        <h3>🇪🇺 Europe</h3>
+        <p>Keyboard editions first. Arrow key editions after.</p>
+        <div class="grid">
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersVenice/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersVenice/')">
+            Venice <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersGreece/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersGreece/')">
+            Greece <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersZurich/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersZurich/')">
+            Zurich
+          </button>
+        </div>
+      </div>
+
+      <!-- Seasonal and Event -->
+      <div class="section">
+        <h3>❄️ Seasonal and Event</h3>
+        <p>Keyboard ready unless listed in another color.</p>
+        <div class="grid">
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersWinterWonderland/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersWinterWonderland/')">
+            Winter Wonderland <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersWinterHoliday/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersWinterHoliday/')">
+            Winter Holiday <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersYearOfTheSnake/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersYearOfTheSnake/')">
+            Year of the Snake <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersIceland2024/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersIceland2024/')">
+            Iceland 2024 <span class="kbd">WASD</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tropical and Ocean -->
+      <div class="section">
+        <h3>🌴 Tropical and Ocean</h3>
+        <p>Keyboard editions first. Arrow key editions after.</p>
+        <div class="grid">
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersHawaii/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersHawaii/')">
+            Hawaii <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersUnderwater/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersUnderwater/')">
+            Underwater <span class="kbd">WASD</span>
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://zohoho.org/_games/subway-surfers-bali/"
+                  onclick="switchGame('https://zohoho.org/_games/subway-surfers-bali/')">
+            Bali
+          </button>
+        </div>
+      </div>
+
+      <!-- Hollywood -->
+      <div class="section">
+        <h3>🎬 Hollywood</h3>
+        <p>Keyboard ready version.</p>
+        <div class="grid">
+          <button class="btn btn-wasd"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersHollywood/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersHollywood/')">
+            Hollywood <span class="kbd">WASD</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Beijing -->
+      <div class="section">
+        <h3>🏯 Beijing</h3>
+        <p>Legacy set and backup. These are arrow key editions.</p>
+        <div class="grid">
+          <button class="btn btn-arrows"
+                  data-url="https://scrap-metal.github.io/s8/subway-surfers-beijing/"
+                  onclick="switchGame('https://scrap-metal.github.io/s8/subway-surfers-beijing/')">
+            Old Main
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://ug17.github.io/play/Subway-Surfers/"
+                  onclick="switchGame('https://ug17.github.io/play/Subway-Surfers/')">
+            Old Backup
+          </button>
+        </div>
+      </div>
+
+      <!-- San Francisco -->
+      <div class="section">
+        <h3>🌉 San Francisco</h3>
+        <p>Arrow key editions.</p>
+        <div class="grid">
+          <button class="btn btn-arrows"
+                  data-url="https://staticquasar931.github.io/SubwaySurfersSanFrancisco/"
+                  onclick="switchGame('https://staticquasar931.github.io/SubwaySurfersSanFrancisco/')">
+            San Francisco
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://zohoho.org/_games/subwaysurfers/"
+                  onclick="switchGame('https://zohoho.org/_games/subwaysurfers/')">
+            Extra Backup A
+          </button>
+          <button class="btn btn-arrows"
+                  data-url="https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html"
+                  onclick="switchGame('https://yell0wsuit.page/assets/games/subway-surfers-unity/index.html')">
+            Extra Backup B
+          </button>
+        </div>
+      </div>
+
+      <div class="muted">Keep the game focused for keyboard input and Esc pause. If controls do not respond, click once inside the game.</div>
     </div>
   </div>
+
+  <!-- Hidden SEO Content -->
+  <section aria-hidden="true" style="position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden;">
+    <h3>Play Subway Surfers unblocked at school</h3>
+    <p>
+      Welcome to the Subway Surfers Multiverse by StaticQuasar931. This hub organizes many editions of the
+      Subway Surfers game so you can pick the one that works best at school or work. The Classic version
+      is the most stable and supports full keyboard play with W A S D keys and Esc to pause. You can also
+      choose keyboard editions like New York 2023, Venice, Greece, Hollywood, Hawaii, Iceland 2024, Winter
+      Wonderland, Winter Holiday, Underwater, and Year of the Snake. If a version does not load on your network,
+      try the Classic edition first, then the keyboard editions, then backups listed on this page.
+    </p>
+    <p>
+      Find more titles and backups on the StaticQuasar931 site:
+      <a href="https://sites.google.com/view/staticquasar931">StaticQuasar931 homepage</a> and the
+      <a href="https://sites.google.com/view/staticquasar931/gm3z">unblocked games list</a>.
+      Popular search phrases include subway surf game, subway surf g@me, Subway Surfers unblocked,
+      Subway Surfers school, and Subway Surfers working at school.
+    </p>
+  </section>
 </body>
 </html>
